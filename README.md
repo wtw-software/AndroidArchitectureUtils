@@ -1,7 +1,7 @@
 # AndroidArchitectureUtils
-Collection of view and adapter classes. 
+Collection of commonly used views and adapter classes. 
 
-[![](https://jitpack.io/v/wtw-software/AndroidRestServiceUtils.svg)](https://jitpack.io/#wtw-software/AndroidArchitectureUtils)
+[![](https://jitpack.io/v/wtw-software/AndroidArchitectureUtils.svg)](https://jitpack.io/#wtw-software/AndroidArchitectureUtils)
 
 License
 -------
