@@ -1,0 +1,55 @@
+apply plugin: 'com.android.library'
+apply plugin: 'com.github.dcendents.android-maven'
+
+group = 'com.github.wtw-software'
+
+android {
+    compileSdkVersion 28
+
+    defaultConfig {
+        minSdkVersion 16
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1"
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = ["resourcePackageName": "no.wtw.android.architectureutils",
+                             "library"            : "true"]
+            }
+        }
+
+        compileOptions {
+            sourceCompatibility JavaVersion.VERSION_1_8
+            targetCompatibility JavaVersion.VERSION_1_8
+        }
+    }
+
+    packagingOptions {
+        exclude 'META-INF/license.txt'
+        exclude 'META-INF/notice.txt'
+        exclude 'META-INF/DEPENDENCIES.txt'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/dependencies.txt'
+        exclude 'META-INF/LGPL2.1'
+        exclude 'LICENSE.txt'
+        exclude 'LICENSE'
+    }
+
+}
+
+ext.AAVersion = '4.4.0'
+ext.supportLibVersion = '28.0.0-rc01'
+
+dependencies {
+    annotationProcessor "org.androidannotations:androidannotations:${AAVersion}"
+    implementation "org.androidannotations:androidannotations-api:${AAVersion}"
+    annotationProcessor "org.androidannotations:rest-spring:${AAVersion}"
+    implementation "org.androidannotations:rest-spring-api:${AAVersion}"
+
+    implementation "com.android.support:design:${supportLibVersion}"
+}
