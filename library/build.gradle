@@ -39,7 +39,6 @@ android {
         exclude 'LICENSE.txt'
         exclude 'LICENSE'
     }
-
 }
 
 ext.AAVersion = '4.4.0'
