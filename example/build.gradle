@@ -1,0 +1,49 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 28
+
+    defaultConfig {
+        applicationId "no.wtw.android.architectureutils.example"
+        minSdkVersion 16
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+
+        vectorDrawables.useSupportLibrary = true
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = ['resourcePackageName': android.defaultConfig.applicationId]
+            }
+        }
+
+        compileOptions {
+            sourceCompatibility JavaVersion.VERSION_1_8
+            targetCompatibility JavaVersion.VERSION_1_8
+        }
+    }
+
+    buildTypes {
+        debug {
+            debuggable true
+            minifyEnabled false
+        }
+    }
+
+}
+
+ext.AAVersion = '4.4.0'
+ext.supportLibVersion = '28.0.0-rc01'
+
+dependencies {
+    annotationProcessor "org.androidannotations:androidannotations:${AAVersion}"
+    implementation "org.androidannotations:androidannotations-api:${AAVersion}"
+    annotationProcessor "org.androidannotations:rest-spring:${AAVersion}"
+    implementation "org.androidannotations:rest-spring-api:${AAVersion}"
+
+    implementation "com.android.support:appcompat-v7:${supportLibVersion}"
+    implementation "com.android.support:design:${supportLibVersion}"
+
+    implementation project(':library')
+}

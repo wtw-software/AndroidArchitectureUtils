@@ -22,7 +22,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:layout_marginLeft="72dp"
+        android:layout_marginLeft="16dp"
+        android:layout_toRightOf="@id/icon"
         android:orientation="vertical">
 
         <TextView
@@ -30,6 +31,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="?android:textColorPrimary"
             tools:text="Testkort" />
 
         <TextView
@@ -37,8 +39,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="?android:textColorSecondary"
             tools:text="**3000" />
     </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/extra_button"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="16dp"
+        android:background="?selectableItemBackgroundBorderless"
+        android:scaleType="centerInside" />
 
 </RelativeLayout>
 

@@ -1,12 +1,16 @@
 package no.wtw.android.architectureutils.adapter;
 
+import android.support.annotation.DrawableRes;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+
+import no.wtw.android.architectureutils.R;
 
 public abstract class RecyclerViewAdapterBase<D, V extends View & ViewWrapper.Binder<D>> extends RecyclerView.Adapter<ViewWrapper<D, V>> {
 
@@ -14,9 +18,18 @@ public abstract class RecyclerViewAdapterBase<D, V extends View & ViewWrapper.Bi
     protected List<D> filteredItems = new ArrayList<>();
 
     private OnItemClickListener<D, V> listener;
+    private OnItemClickListener<D, V> extraClickListener;
+    @DrawableRes
+    private int extraButtonClickResource;
 
     public void setOnItemClickListener(OnItemClickListener<D, V> listener) {
         this.listener = listener;
+    }
+
+    public void setonItemExtraClickListener(OnItemClickListener<D, V> listener, @DrawableRes int iconResourceId) {
+        this.extraClickListener = listener;
+        this.extraButtonClickResource = iconResourceId;
+        notifyDataSetChanged();
     }
 
     @Override
@@ -32,11 +45,20 @@ public abstract class RecyclerViewAdapterBase<D, V extends View & ViewWrapper.Bi
         final D data = filteredItems.get(position);
         view.bind(data);
         view.setOnClickListener(v -> onItemClick(viewHolder.getAdapterPosition(), view, data));
+        ImageButton extraClickButton = view.findViewById(R.id.extra_button);
+        extraClickButton.setOnClickListener(v -> onItemExtraClick(viewHolder.getAdapterPosition(), view, data));
+        extraClickButton.setVisibility(extraClickListener == null ? View.GONE : View.VISIBLE);
+        extraClickButton.setImageResource(extraButtonClickResource);
     }
 
     public void onItemClick(int position, V view, D data) {
         if (listener != null)
             listener.onItemClick(position, view, data);
+    }
+
+    public void onItemExtraClick(int position, V view, D data) {
+        if (extraClickListener != null)
+            extraClickListener.onItemClick(position, view, data);
     }
 
     @Override

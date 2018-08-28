@@ -2,6 +2,7 @@ package no.wtw.android.architectureutils.view;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -14,6 +15,8 @@ import no.wtw.android.architectureutils.model.Listable;
 @EViewGroup(resName = "list_item_view")
 public class ListItemView extends RelativeLayout implements ViewWrapper.Binder<Listable> {
 
+    @ViewById(resName = "icon")
+    protected ImageView iconView;
     @ViewById(resName = "title")
     protected TextView titleView;
     @ViewById(resName = "subtitle")
@@ -33,6 +36,8 @@ public class ListItemView extends RelativeLayout implements ViewWrapper.Binder<L
 
     @Override
     public void bind(Listable data) {
+        iconView.setImageResource(data.getIconResourceId());
+        iconView.setVisibility(data.getIconResourceId() == 0 ? GONE : VISIBLE);
         titleView.setText(data.getTitle());
         subTitleView.setText(data.getSubTitle());
     }
