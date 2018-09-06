@@ -1,6 +1,7 @@
 package no.wtw.android.architectureutils.example.activity;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
@@ -42,17 +43,17 @@ public class ExampleActivity extends AppCompatActivity {
     private class ExampleItem implements Listable {
 
         @Override
-        public String getTitle() {
+        public String getTitle(Context context) {
             return "foo";
         }
 
         @Override
-        public String getSubTitle() {
+        public String getSubTitle(Context context) {
             return "bar";
         }
 
         @Override
-        public int getIconResourceId() {
+        public int getIconResourceId(Context context) {
             return R.drawable.ic_person_black_24dp;
         }
 

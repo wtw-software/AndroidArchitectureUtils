@@ -36,10 +36,10 @@ public class ListItemView extends RelativeLayout implements ViewWrapper.Binder<L
 
     @Override
     public void bind(Listable data) {
-        iconView.setImageResource(data.getIconResourceId());
-        iconView.setVisibility(data.getIconResourceId() == 0 ? GONE : VISIBLE);
-        titleView.setText(data.getTitle());
-        subTitleView.setText(data.getSubTitle());
+        iconView.setImageResource(data.getIconResourceId(getContext()));
+        iconView.setVisibility(data.getIconResourceId(getContext()) == 0 ? GONE : VISIBLE);
+        titleView.setText(data.getTitle(getContext()));
+        subTitleView.setText(data.getSubTitle(getContext()));
     }
 
 }
