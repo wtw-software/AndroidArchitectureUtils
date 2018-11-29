@@ -1,12 +1,13 @@
 package no.wtw.android.architectureutils.adapter;
 
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 public abstract class RecyclerViewAdapterBase<D, V extends View & ViewWrapper.Binder<D>> extends RecyclerView.Adapter<ViewWrapper<D, V>> {
 

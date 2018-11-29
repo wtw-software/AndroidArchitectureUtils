@@ -1,7 +1,8 @@
 package no.wtw.android.architectureutils.model;
 
 import android.content.Context;
-import android.support.annotation.DrawableRes;
+
+import androidx.annotation.DrawableRes;
 
 public interface Listable {
 

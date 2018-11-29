@@ -2,10 +2,6 @@ package no.wtw.android.architectureutils.example.activity;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.DividerItemDecoration;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
 
 import org.androidannotations.annotations.AfterViews;
@@ -13,6 +9,10 @@ import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.ViewById;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import no.wtw.android.architectureutils.adapter.ListItemAdapter;
 import no.wtw.android.architectureutils.example.R;
 import no.wtw.android.architectureutils.model.Listable;
@@ -29,7 +29,7 @@ public class ExampleActivity extends AppCompatActivity {
 
     @AfterViews
     protected void init() {
-        list.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        list.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
         list.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
         list.setAdapter(adapter);
 

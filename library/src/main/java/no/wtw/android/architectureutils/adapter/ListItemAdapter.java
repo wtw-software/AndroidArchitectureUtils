@@ -1,7 +1,6 @@
 package no.wtw.android.architectureutils.adapter;
 
 import android.content.Context;
-import android.support.annotation.DrawableRes;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
@@ -9,6 +8,7 @@ import android.widget.ImageButton;
 import org.androidannotations.annotations.EBean;
 import org.androidannotations.annotations.RootContext;
 
+import androidx.annotation.DrawableRes;
 import no.wtw.android.architectureutils.R;
 import no.wtw.android.architectureutils.model.Listable;
 import no.wtw.android.architectureutils.view.ListItemView;
