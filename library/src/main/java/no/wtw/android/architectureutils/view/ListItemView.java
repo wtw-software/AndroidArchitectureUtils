@@ -1,6 +1,7 @@
 package no.wtw.android.architectureutils.view;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -40,6 +41,7 @@ public class ListItemView extends RelativeLayout implements ViewWrapper.Binder<L
         iconView.setVisibility(data.getIconResourceId(getContext()) == 0 ? GONE : VISIBLE);
         titleView.setText(data.getTitle(getContext()));
         subTitleView.setText(data.getSubTitle(getContext()));
+        subTitleView.setVisibility(TextUtils.isEmpty(data.getSubTitle(getContext())) ? GONE : VISIBLE);
     }
 
 }
