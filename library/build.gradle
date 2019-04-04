@@ -41,12 +41,12 @@ android {
     }
 }
 
-ext.AAVersion = '4.5.2'
+ext.AAVersion = '4.6.0'
 
 dependencies {
     annotationProcessor "org.androidannotations:androidannotations:${AAVersion}"
     implementation "org.androidannotations:androidannotations-api:${AAVersion}"
 
-    implementation 'androidx.annotation:annotation:1.0.0'
+    implementation 'androidx.annotation:annotation:1.0.2'
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
 }
