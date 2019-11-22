@@ -21,7 +21,7 @@ public abstract class RecyclerViewAdapterBase<D, V extends View & ViewWrapper.Bi
     }
 
     @Override
-    public final ViewWrapper<D, V> onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewWrapper<D, V> onCreateViewHolder(ViewGroup parent, int viewType) {
         return new ViewWrapper<>(onCreateItemView(parent, viewType));
     }
 
