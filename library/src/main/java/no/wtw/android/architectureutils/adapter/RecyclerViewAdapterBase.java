@@ -76,7 +76,6 @@ public abstract class RecyclerViewAdapterBase<D, V extends View & ViewWrapper.Bi
     public void filter(String constraint) {
         filteredItems.clear();
         filteredItems.addAll(getFilteredItems(constraint));
-        notifyDataSetChanged();
     }
 
     // Override to filter
