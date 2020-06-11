@@ -6,8 +6,8 @@
     android:layout_height="wrap_content"
     android:background="?selectableItemBackground"
     android:minHeight="?listPreferredItemHeightLarge"
-    android:paddingBottom="16dp"
-    android:paddingTop="16dp">
+    android:paddingTop="16dp"
+    android:paddingBottom="16dp">
 
     <ImageView
         android:id="@+id/icon"
@@ -50,7 +50,9 @@
         android:layout_centerVertical="true"
         android:layout_marginRight="16dp"
         android:background="?selectableItemBackgroundBorderless"
-        android:scaleType="centerInside" />
+        android:scaleType="centerInside"
+        android:visibility="gone"
+        tools:visibility="visible" />
 
 </RelativeLayout>
 
