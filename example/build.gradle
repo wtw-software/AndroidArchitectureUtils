@@ -1,12 +1,14 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion 29
 
     defaultConfig {
         applicationId "no.wtw.android.architectureutils.example"
         minSdkVersion 16
-        targetSdkVersion 28
+        targetSdkVersion 29
         versionCode 1
         versionName "1.0"
 
@@ -31,18 +33,25 @@ android {
         }
     }
 
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+
+    kapt {
+        correctErrorTypes = true
+    }
+
 }
 
-ext.AAVersion = '4.5.2'
+ext.AAVersion = '4.6.0'
 
 dependencies {
-    annotationProcessor "org.androidannotations:androidannotations:${AAVersion}"
+    kapt "org.androidannotations:androidannotations:${AAVersion}"
     implementation "org.androidannotations:androidannotations-api:${AAVersion}"
-    annotationProcessor "org.androidannotations:rest-spring:${AAVersion}"
+    kapt "org.androidannotations:rest-spring:${AAVersion}"
     implementation "org.androidannotations:rest-spring-api:${AAVersion}"
 
-    implementation 'androidx.appcompat:appcompat:1.0.2'
-    implementation 'androidx.recyclerview:recyclerview:1.0.0'
+    implementation 'androidx.appcompat:appcompat:1.1.0'
 
     implementation project(':library')
 }

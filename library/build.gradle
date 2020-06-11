@@ -1,14 +1,16 @@
 apply plugin: 'com.android.library'
 apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
 
 group = 'com.github.wtw-software'
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion 29
 
     defaultConfig {
         minSdkVersion 16
-        targetSdkVersion 28
+        targetSdkVersion 29
         versionCode 1
         versionName "1"
 
@@ -44,9 +46,9 @@ android {
 ext.AAVersion = '4.6.0'
 
 dependencies {
-    annotationProcessor "org.androidannotations:androidannotations:${AAVersion}"
+    kapt "org.androidannotations:androidannotations:${AAVersion}"
     implementation "org.androidannotations:androidannotations-api:${AAVersion}"
 
-    implementation 'androidx.annotation:annotation:1.0.2'
-    implementation 'androidx.recyclerview:recyclerview:1.0.0'
+    implementation 'androidx.annotation:annotation:1.1.0'
+    api 'androidx.recyclerview:recyclerview:1.1.0'
 }
