@@ -17,7 +17,7 @@ class OTPActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        otpObserver = OTPLifecycleObserver(this, REQUEST_USER_CONSENT) { sms ->
+        otpObserver = OTPLifecycleObserver(this, REQUEST_USER_CONSENT, "2097") { sms ->
             val pinCode = sms.substring(0, 4)
         }.registerLifecycle(lifecycle)
     }

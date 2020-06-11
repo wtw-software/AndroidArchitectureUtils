@@ -11,6 +11,7 @@ import com.google.android.gms.auth.api.phone.SmsRetriever
 class OTPLifecycleObserver(
         private val activity: Activity,
         private val requestCode: Int,
+        private val senderNumber: String? = null,
         val callback: (sms: String) -> Unit)
     : LifecycleObserver {
 
@@ -24,6 +25,7 @@ class OTPLifecycleObserver(
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     fun onCreate() {
         smsBroadcastReceiver = SmsBroadcastReceiver { intent -> activity.startActivityForResult(intent, requestCode) }
+        SmsRetriever.getClient(activity).startSmsUserConsent(senderNumber)
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
