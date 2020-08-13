@@ -1,44 +1,29 @@
 package no.wtw.android.architectureutils.example.activity
 
 import android.content.Intent
-import android.content.IntentSender.SendIntentException
+import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.gms.auth.api.credentials.Credential
-import com.google.android.gms.auth.api.credentials.CredentialPickerConfig
-import com.google.android.gms.auth.api.credentials.Credentials
-import com.google.android.gms.auth.api.credentials.HintRequest
+import no.wtw.android.architectureutils.util.PhoneNumberHintPicker
 
+// Relies on com.google.android.gms:play-services-auth
 class SelectPhoneNumberActivity : AppCompatActivity() {
 
-    companion object {
-        const val REQUEST_SIGN_IN_HINT = 1
+    private lateinit var hintPicker: PhoneNumberHintPicker
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        hintPicker = PhoneNumberHintPicker(this, 1 /* REQUEST_CODE_FOR_HINT_PICKER */) { credentialId ->
+            val phoneNumber = credentialId
+        }
     }
 
-    // Relies on com.google.android.gms:play-services-auth
     fun showHintPicker() {
-        val hintRequest = HintRequest.Builder()
-                .setHintPickerConfig(CredentialPickerConfig.Builder().setShowCancelButton(true).build())
-                .setPhoneNumberIdentifierSupported(true)
-                .setEmailAddressIdentifierSupported(false)
-                .build()
-        val intent = Credentials.getClient(this).getHintPickerIntent(hintRequest)
-        try {
-            startIntentSenderForResult(intent.intentSender, REQUEST_SIGN_IN_HINT, null, 0, 0, 0)
-        } catch (e: SendIntentException) {
-            e.printStackTrace()
-        }
+        hintPicker.startForResult()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, intent: Intent?) {
         super.onActivityResult(requestCode, resultCode, intent)
-        when (requestCode) {
-            REQUEST_SIGN_IN_HINT -> {
-                if (resultCode == RESULT_OK && intent != null) {
-                    val credential: Credential? = intent.getParcelableExtra(Credential.EXTRA_KEY)
-                    val phoneNumber = credential?.id ?: ""
-                }
-            }
-        }
+        hintPicker.onActivityResult(requestCode, resultCode, intent)
     }
 
 }
