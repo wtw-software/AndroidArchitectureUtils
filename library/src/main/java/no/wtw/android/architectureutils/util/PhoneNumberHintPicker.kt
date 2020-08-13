@@ -11,7 +11,7 @@ import com.google.android.gms.auth.api.credentials.HintRequest
 class PhoneNumberHintPicker(
         private val activity: Activity,
         private val requestCode: Int,
-        val callback: (sms: String?) -> Unit) {
+        val callback: (credentialId: String) -> Unit) {
 
     fun startForResult(): PhoneNumberHintPicker {
         val hintRequest = HintRequest.Builder()
