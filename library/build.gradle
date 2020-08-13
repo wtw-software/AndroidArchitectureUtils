@@ -18,7 +18,8 @@ android {
         javaCompileOptions {
             annotationProcessorOptions {
                 arguments = ["resourcePackageName": "no.wtw.android.architectureutils",
-                             "library"            : "true"]
+                             "library"            : "true",
+                             "androidManifestFile": "$projectDir/src/main/AndroidManifest.xml".toString()]
             }
         }
 
