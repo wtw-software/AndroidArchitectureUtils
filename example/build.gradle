@@ -44,7 +44,7 @@ android {
 
 }
 
-ext.AAVersion = '4.6.0'
+ext.AAVersion = '4.7.0'
 
 dependencies {
     kapt "org.androidannotations:androidannotations:${AAVersion}"
