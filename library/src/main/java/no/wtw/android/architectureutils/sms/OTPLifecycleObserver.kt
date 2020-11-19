@@ -7,6 +7,8 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.OnLifecycleEvent
 import com.google.android.gms.auth.api.phone.SmsRetriever
+import com.google.android.gms.common.ConnectionResult
+import com.google.android.gms.common.GoogleApiAvailability
 
 class OTPLifecycleObserver(
         private val activity: Activity,
@@ -15,17 +17,20 @@ class OTPLifecycleObserver(
         val callback: (sms: String) -> Unit)
     : LifecycleObserver {
 
-    private lateinit var smsBroadcastReceiver: SmsBroadcastReceiver
+    private var isGooglePlayServicesAvailable = false
 
-    fun registerLifecycle(lifecycle: Lifecycle): OTPLifecycleObserver {
-        lifecycle.addObserver(this)
-        return this
+    init {
+        isGooglePlayServicesAvailable = ConnectionResult.SUCCESS == GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(activity)
     }
+
+    private lateinit var smsBroadcastReceiver: SmsBroadcastReceiver
 
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     fun onCreate() {
         smsBroadcastReceiver = SmsBroadcastReceiver { intent -> activity.startActivityForResult(intent, requestCode) }
-        SmsRetriever.getClient(activity).startSmsUserConsent(senderNumber)
+        if (isGooglePlayServicesAvailable)
+            SmsRetriever.getClient(activity).startSmsUserConsent(senderNumber)
+
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
