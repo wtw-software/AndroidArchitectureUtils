@@ -17,18 +17,12 @@ class OTPLifecycleObserver(
         val callback: (sms: String) -> Unit)
     : LifecycleObserver {
 
-    private var isGooglePlayServicesAvailable = false
-
-    init {
-        isGooglePlayServicesAvailable = ConnectionResult.SUCCESS == GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(activity)
-    }
-
     private lateinit var smsBroadcastReceiver: SmsBroadcastReceiver
 
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     fun onCreate() {
         smsBroadcastReceiver = SmsBroadcastReceiver { intent -> activity.startActivityForResult(intent, requestCode) }
-        if (isGooglePlayServicesAvailable)
+        if (ConnectionResult.SUCCESS == GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(activity))
             SmsRetriever.getClient(activity).startSmsUserConsent(senderNumber)
 
     }
