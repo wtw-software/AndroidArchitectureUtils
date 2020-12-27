@@ -2,7 +2,9 @@ package no.wtw.android.architectureutils.externalpayment;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.os.Build;
 import android.view.View;
+import android.webkit.CookieManager;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.Toast;
@@ -28,8 +30,11 @@ public abstract class ExternalPaymentWebViewActivity extends Activity implements
     protected void afterViews() {
         client = new ExternalPaymentWebViewClient(this);
         WebSettings webSettings = webView.getSettings();
+        webSettings.setDomStorageEnabled(true);
         webSettings.setJavaScriptEnabled(true);
         webSettings.setJavaScriptCanOpenWindowsAutomatically(true);
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
+            CookieManager.getInstance().setAcceptThirdPartyCookies(webView, true);
         webView.setWebViewClient(client);
         try {
             webView.loadUrl(getExternalPaymentUrl());
