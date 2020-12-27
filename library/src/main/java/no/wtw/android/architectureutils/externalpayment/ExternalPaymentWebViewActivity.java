@@ -31,6 +31,10 @@ public abstract class ExternalPaymentWebViewActivity extends Activity implements
         client = new ExternalPaymentWebViewClient(this);
         WebSettings webSettings = webView.getSettings();
         webSettings.setDomStorageEnabled(true);
+        webSettings.setDatabaseEnabled(true);
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
+            webSettings.setDatabasePath("/data/data/" + webView.getContext().getPackageName() + "/databases/");
+        }
         webSettings.setJavaScriptEnabled(true);
         webSettings.setJavaScriptCanOpenWindowsAutomatically(true);
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
