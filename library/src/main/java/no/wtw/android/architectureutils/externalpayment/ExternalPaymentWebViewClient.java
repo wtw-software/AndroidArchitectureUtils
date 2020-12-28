@@ -24,7 +24,7 @@ public class ExternalPaymentWebViewClient extends WebViewClient {
 
     @Override
     public void onPageStarted(WebView view, String url, Bitmap favicon) {
-        if (!url.contains(listener.getExternalPaymentCancelledUrl()) && !url.contains(listener.getExternalPaymentSuccessUrl())) {
+        if (!url.equals(listener.getExternalPaymentCancelledUrl()) && !url.equals(listener.getExternalPaymentSuccessUrl())) {
             isLoading = true;
             listener.setIsLoading(true);
         }
@@ -58,10 +58,10 @@ public class ExternalPaymentWebViewClient extends WebViewClient {
     }
 
     private boolean handleUri(final String url) {
-        if (url.startsWith(listener.getExternalPaymentSuccessUrl())) {
+        if (url.equals(listener.getExternalPaymentSuccessUrl())) {
             listener.onExternalPaymentSuccess(url.replace(listener.getExternalPaymentSuccessUrl() + ":", ""));
             return true;
-        } else if (url.startsWith(listener.getExternalPaymentCancelledUrl())) {
+        } else if (url.equals(listener.getExternalPaymentCancelledUrl())) {
             listener.onExternalPaymentCancelled();
             return true;
         }
