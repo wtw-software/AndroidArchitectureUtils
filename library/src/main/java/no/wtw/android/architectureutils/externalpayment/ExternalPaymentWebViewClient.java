@@ -24,7 +24,8 @@ public class ExternalPaymentWebViewClient extends WebViewClient {
 
     @Override
     public void onPageStarted(WebView view, String url, Bitmap favicon) {
-        if (!url.equals(listener.getExternalPaymentCancelledUrl()) && !url.equals(listener.getExternalPaymentSuccessUrl())) {
+        if (!isMatch(url, listener.getExternalPaymentCancelledUrl(), listener.isExternalPaymentCancelledUrlExactMatch())
+                && !isMatch(url, listener.getExternalPaymentSuccessUrl(), listener.isExternalPaymentSuccessUrlExactMatch())) {
             isLoading = true;
             listener.setIsLoading(true);
         }
@@ -58,14 +59,19 @@ public class ExternalPaymentWebViewClient extends WebViewClient {
     }
 
     private boolean handleUri(final String url) {
-        if (url.equals(listener.getExternalPaymentSuccessUrl())) {
+        if (isMatch(url, listener.getExternalPaymentSuccessUrl(), listener.isExternalPaymentSuccessUrlExactMatch())) {
             listener.onExternalPaymentSuccess(url.replace(listener.getExternalPaymentSuccessUrl() + ":", ""));
             return true;
-        } else if (url.equals(listener.getExternalPaymentCancelledUrl())) {
+        } else if (isMatch(url, listener.getExternalPaymentCancelledUrl(), listener.isExternalPaymentCancelledUrlExactMatch())) {
             listener.onExternalPaymentCancelled();
             return true;
         }
         return false;
+    }
+
+    private boolean isMatch(String currentUrl, String destinationUrl, boolean isExactMatch) {
+        return (currentUrl.equalsIgnoreCase(destinationUrl) && isExactMatch)
+                || (currentUrl.toLowerCase().startsWith(destinationUrl.toLowerCase()) && !isExactMatch);
     }
 
 }

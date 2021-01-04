@@ -12,4 +12,10 @@ public interface ExternalPaymentWebViewListener {
 
     String getExternalPaymentSuccessUrl();
 
+    /* Return true for exact match on cancel URL, or false for startsWith-match */
+    boolean isExternalPaymentCancelledUrlExactMatch();
+
+    /* Return true for exact match on success URL, or false for startsWith-match */
+    boolean isExternalPaymentSuccessUrlExactMatch();
+
 }

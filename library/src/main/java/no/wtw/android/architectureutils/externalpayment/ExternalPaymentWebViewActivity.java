@@ -74,6 +74,16 @@ public abstract class ExternalPaymentWebViewActivity extends Activity implements
         return "mobillett:transsuccess";
     }
 
+    @Override
+    public boolean isExternalPaymentSuccessUrlExactMatch() {
+        return false;
+    }
+
+    @Override
+    public boolean isExternalPaymentCancelledUrlExactMatch() {
+        return false;
+    }
+
     protected abstract String getExternalPaymentUrl() throws Exception;
 
 }
