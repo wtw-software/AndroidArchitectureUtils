@@ -35,6 +35,12 @@ public class IntentUtility {
         return intent;
     }
 
+    public static Intent getAppSettingsIntent(Context context) {
+        Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+        intent.setData(Uri.fromParts("package", context.getPackageName(), null));
+        return intent;
+    }
+
     public static Intent getAppIntent(Context context, String packageId) throws Exception {
         try {
             Intent intent = context.getPackageManager().getLaunchIntentForPackage(packageId);
