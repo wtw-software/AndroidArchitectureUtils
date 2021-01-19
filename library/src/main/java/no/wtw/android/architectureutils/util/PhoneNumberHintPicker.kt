@@ -2,7 +2,6 @@ package no.wtw.android.architectureutils.util
 
 import android.app.Activity
 import android.content.Intent
-import android.content.IntentSender
 import com.google.android.gms.auth.api.credentials.Credential
 import com.google.android.gms.auth.api.credentials.CredentialPickerConfig
 import com.google.android.gms.auth.api.credentials.Credentials
@@ -22,7 +21,7 @@ class PhoneNumberHintPicker(
         val intent = Credentials.getClient(activity).getHintPickerIntent(hintRequest)
         try {
             activity.startIntentSenderForResult(intent.intentSender, requestCode, null, 0, 0, 0)
-        } catch (e: IntentSender.SendIntentException) {
+        } catch (e: Exception) {
             e.printStackTrace()
         }
         return this
