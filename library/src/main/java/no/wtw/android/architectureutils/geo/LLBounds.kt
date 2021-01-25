@@ -65,4 +65,17 @@ data class LLBounds(val southWest: LL, val northEast: LL) : Serializable {
         return LL(lat, lng)
     }
 
+    fun contains(ll: LL): Boolean {
+        val lat = ll.latitude
+        return this.southWest.latitude <= lat && lat <= this.northEast.latitude && this.zza(ll.longitude);
+    }
+
+    private fun zza(ll: Double): Boolean {
+        return if (this.southWest.longitude <= this.northEast.longitude) {
+            this.southWest.longitude <= ll && ll <= this.northEast.longitude
+        } else {
+            this.southWest.longitude <= ll || ll <= this.northEast.longitude
+        }
+    }
+
 }
