@@ -18,4 +18,6 @@ public interface ExternalPaymentWebViewListener {
     /* Return true for exact match on success URL, or false for startsWith-match */
     boolean isExternalPaymentSuccessUrlExactMatch();
 
+    boolean handleSpecialUrl(String url);
+
 }

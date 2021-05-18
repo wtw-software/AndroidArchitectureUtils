@@ -65,8 +65,9 @@ public class ExternalPaymentWebViewClient extends WebViewClient {
         } else if (isMatch(url, listener.getExternalPaymentCancelledUrl(), listener.isExternalPaymentCancelledUrlExactMatch())) {
             listener.onExternalPaymentCancelled();
             return true;
+        } else {
+            return listener.handleSpecialUrl(url);
         }
-        return false;
     }
 
     private boolean isMatch(String currentUrl, String destinationUrl, boolean isExactMatch) {
