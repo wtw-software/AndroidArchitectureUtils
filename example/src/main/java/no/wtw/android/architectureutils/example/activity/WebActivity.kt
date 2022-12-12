@@ -7,10 +7,10 @@ class WebActivity : ExternalPaymentWebViewActivity() {
     override fun getExternalPaymentUrl() =
         "https://www.vg.no"
 
-    override fun onExternalPaymentSuccess(paymentMethodId: String?) {
+    override fun onExternalPaymentSuccess(paymentMethodId: String) {
         finish()
     }
 
-    override fun handleSpecialUrl(url: String?) = false
+    override fun handleSpecialUrl(url: String) = false
 
 }
