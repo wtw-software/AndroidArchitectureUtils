@@ -29,6 +29,16 @@ class IntentBuilder<T : Activity>(
         return this
     }
 
+    fun addFlags(flags: Int): IntentBuilder<T> {
+        intent.flags = intent.flags or flags
+        return this
+    }
+
+    fun removeFlags(flags: Int): IntentBuilder<T> {
+        intent.flags = intent.flags and flags.inv()
+        return this
+    }
+
     fun get() = intent
     fun start() = ctx.startActivity(intent)
 
