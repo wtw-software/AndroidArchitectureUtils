@@ -7,8 +7,9 @@ import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import kotlin.reflect.KClass
 
-fun <T : Activity> KClass<T>.intent(activity: Activity): IntentBuilder<T> {
-    return IntentBuilder(activity, null, this)
+
+fun <T : Activity> KClass<T>.intent(ctx: Context): IntentBuilder<T> {
+    return IntentBuilder(ctx, null, this)
 }
 
 fun <T : Activity> KClass<T>.intent(fragment: Fragment): IntentBuilder<T> {
