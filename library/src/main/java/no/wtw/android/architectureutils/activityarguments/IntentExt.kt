@@ -10,36 +10,36 @@ import kotlin.reflect.cast
 const val SAVED_INSTANCE_STATE = "saved_instance_state"
 const val ARGUMENTS = "activity_arguments"
 
-fun <T : BundleData> Intent.putArguments(args: T): Intent {
-    putExtra(ARGUMENTS, args)
+fun <T : BundleData> Intent.putArguments(args: T, key: String = ARGUMENTS): Intent {
+    putExtra(key, args)
     return this
 }
 
-fun <T : BundleData> Intent.getArguments(clazz: KClass<T>): T {
+fun <T : BundleData> Intent.getArguments(clazz: KClass<T>, key: String = ARGUMENTS): T {
     return extras?.let { bundle ->
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            bundle.getBundleDataTiramisu(ARGUMENTS, clazz)
+            bundle.getBundleDataTiramisu(key, clazz)
         } else {
-            bundle.getBundleDataCompat(ARGUMENTS, clazz)
+            bundle.getBundleDataCompat(key, clazz)
         }
     } ?: throw IllegalArgumentException("Extras is null")
 }
 
-fun <T : BundleData> Bundle.putSavedState(args: T): Bundle {
-    putSerializable(SAVED_INSTANCE_STATE, args)
+fun <T : BundleData> Bundle.putSavedState(args: T, key: String = SAVED_INSTANCE_STATE): Bundle {
+    putSerializable(key, args)
     return this
 }
 
-inline fun <reified T : BundleData> Bundle.getSavedState(): T? {
-    return getSavedStateWithExplicitKClass(T::class)
+inline fun <reified T : BundleData> Bundle.getSavedState(key: String = SAVED_INSTANCE_STATE): T? {
+    return getSavedStateWithExplicitKClass(T::class, key)
 }
 
-fun <T : BundleData> Bundle.getSavedStateWithExplicitKClass(clazz: KClass<T>): T? {
+fun <T : BundleData> Bundle.getSavedStateWithExplicitKClass(clazz: KClass<T>, key: String): T? {
     return try {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            getBundleDataTiramisu(SAVED_INSTANCE_STATE, clazz)
+            getBundleDataTiramisu(key, clazz)
         } else {
-            getBundleDataCompat(SAVED_INSTANCE_STATE, clazz)
+            getBundleDataCompat(key, clazz)
         }
     } catch (e: Exception) {
         null
@@ -47,8 +47,8 @@ fun <T : BundleData> Bundle.getSavedStateWithExplicitKClass(clazz: KClass<T>): T
 }
 
 @RequiresApi(Build.VERSION_CODES.TIRAMISU)
-fun <T : BundleData> Bundle.getBundleDataTiramisu(extraName: String, clazz: KClass<T>): T {
-    return getSerializable(extraName, clazz.java)
+fun <T : BundleData> Bundle.getBundleDataTiramisu(key: String, clazz: KClass<T>): T {
+    return getSerializable(key, clazz.java)
         ?: throw IllegalArgumentException("Arguments are null or of wrong type. Expected " + clazz.java)
 }
 
