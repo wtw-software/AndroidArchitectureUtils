@@ -80,6 +80,8 @@ abstract class AbstractPrefs(
         else
             sharedPreferences.edit().putLong(key, value).apply()
 
+    fun clear() =
+        sharedPreferences.edit().clear().apply()
 
     fun getStringRes(@StringRes resId: Int) =
         ctx.resources.getString(resId)
