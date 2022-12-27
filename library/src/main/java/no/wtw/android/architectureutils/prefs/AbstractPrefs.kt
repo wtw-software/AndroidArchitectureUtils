@@ -20,6 +20,7 @@ abstract class AbstractPrefs(
     fun putStringPref(@StringRes keyRes: Int, value: String) =
         sharedPreferences.edit().putString(ctx.getString(keyRes), value).apply()
 
+
     fun getBooleanPref(@StringRes keyRes: Int): Boolean? =
         getBooleanPref(ctx.getString(keyRes))
 
@@ -32,6 +33,7 @@ abstract class AbstractPrefs(
     fun putBooleanPref(@StringRes keyRes: Int, value: Boolean) =
         sharedPreferences.edit().putBoolean(ctx.getString(keyRes), value).apply()
 
+
     fun getIntPref(@StringRes keyRes: Int): Int? =
         getIntPref(ctx.getString(keyRes))
 
@@ -41,8 +43,21 @@ abstract class AbstractPrefs(
         else
             null
 
-    fun putIntPref(@StringRes keyRes: Int, value: Int) =
+    fun putIngPref(@StringRes keyRes: Int, value: Int) =
         sharedPreferences.edit().putInt(ctx.getString(keyRes), value).apply()
+
+
+    fun getLongPref(@StringRes keyRes: Int): Long? =
+        getLongPref(ctx.getString(keyRes))
+
+    fun getLongPref(key: String): Long? =
+        if (sharedPreferences.contains(key))
+            sharedPreferences.getLong(key, 0L)
+        else
+            null
+
+    fun putLongPref(@StringRes keyRes: Int, value: Long) =
+        sharedPreferences.edit().putLong(ctx.getString(keyRes), value).apply()
 
 
     fun getStringRes(@StringRes resId: Int) =
