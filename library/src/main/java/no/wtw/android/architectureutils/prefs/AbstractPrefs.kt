@@ -17,8 +17,11 @@ abstract class AbstractPrefs(
     fun getStringPref(key: String): String? =
         sharedPreferences.getString(key, null)
 
-    fun putStringPref(@StringRes keyRes: Int, value: String) =
-        sharedPreferences.edit().putString(ctx.getString(keyRes), value).apply()
+    fun putStringPref(@StringRes keyRes: Int, value: String?) =
+        putStringPref(ctx.getString(keyRes), value)
+
+    fun putStringPref(key: String, value: String?) =
+        sharedPreferences.edit().putString(key, value).apply()
 
 
     fun getBooleanPref(@StringRes keyRes: Int): Boolean? =
@@ -30,8 +33,14 @@ abstract class AbstractPrefs(
         else
             null
 
-    fun putBooleanPref(@StringRes keyRes: Int, value: Boolean) =
-        sharedPreferences.edit().putBoolean(ctx.getString(keyRes), value).apply()
+    fun putBooleanPref(@StringRes keyRes: Int, value: Boolean?) =
+        putBooleanPref(ctx.getString(keyRes), value)
+
+    fun putBooleanPref(key: String, value: Boolean?) =
+        if (value == null)
+            sharedPreferences.edit().remove(key).apply()
+        else
+            sharedPreferences.edit().putBoolean(key, value).apply()
 
 
     fun getIntPref(@StringRes keyRes: Int): Int? =
@@ -43,8 +52,14 @@ abstract class AbstractPrefs(
         else
             null
 
-    fun putIngPref(@StringRes keyRes: Int, value: Int) =
-        sharedPreferences.edit().putInt(ctx.getString(keyRes), value).apply()
+    fun putIntPref(@StringRes keyRes: Int, value: Int?) =
+        putIntPref(ctx.getString(keyRes), value)
+
+    fun putIntPref(key: String, value: Int?) =
+        if (value == null)
+            sharedPreferences.edit().remove(key).apply()
+        else
+            sharedPreferences.edit().putInt(key, value).apply()
 
 
     fun getLongPref(@StringRes keyRes: Int): Long? =
@@ -57,7 +72,13 @@ abstract class AbstractPrefs(
             null
 
     fun putLongPref(@StringRes keyRes: Int, value: Long) =
-        sharedPreferences.edit().putLong(ctx.getString(keyRes), value).apply()
+        putLongPref(ctx.getString(keyRes), value)
+
+    fun putLongPref(key: String, value: Long?) =
+        if (value == null)
+            sharedPreferences.edit().remove(key).apply()
+        else
+            sharedPreferences.edit().putLong(key, value).apply()
 
 
     fun getStringRes(@StringRes resId: Int) =
