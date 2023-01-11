@@ -65,6 +65,13 @@ public abstract class RecyclerViewAdapterBase<D, V extends View & ViewWrapper.Bi
         notifyDataSetChanged();
     }
 
+    public void replaceAll(Collection<D> collection) {
+        originalItems.clear();
+        originalItems.addAll(collection);
+        filter(null);
+        notifyDataSetChanged();
+    }
+
     public interface OnItemClickListener<D, V> {
         void onItemClick(int position, V view, D data);
     }
