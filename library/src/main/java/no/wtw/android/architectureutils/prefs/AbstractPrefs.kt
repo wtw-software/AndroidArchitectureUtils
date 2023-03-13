@@ -71,7 +71,7 @@ abstract class AbstractPrefs(
         else
             null
 
-    fun putLongPref(@StringRes keyRes: Int, value: Long) =
+    fun putLongPref(@StringRes keyRes: Int, value: Long?) =
         putLongPref(ctx.getString(keyRes), value)
 
     fun putLongPref(key: String, value: Long?) =
@@ -79,6 +79,24 @@ abstract class AbstractPrefs(
             sharedPreferences.edit().remove(key).apply()
         else
             sharedPreferences.edit().putLong(key, value).apply()
+
+    fun getFloatPref(@StringRes keyRes: Int): Float? =
+        getFloatPref(ctx.getString(keyRes))
+
+    fun getFloatPref(key: String): Float? =
+        if (sharedPreferences.contains(key))
+            sharedPreferences.getFloat(key, 0f)
+        else
+            null
+
+    fun putFloatPref(@StringRes keyRes: Int, value: Float?) =
+        putFloatPref(ctx.getString(keyRes), value)
+
+    fun putFloatPref(key: String, value: Float?) =
+        if (value == null)
+            sharedPreferences.edit().remove(key).apply()
+        else
+            sharedPreferences.edit().putFloat(key, value).apply()
 
     fun clear() =
         sharedPreferences.edit().clear().apply()
