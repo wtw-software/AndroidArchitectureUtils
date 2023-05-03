@@ -98,9 +98,6 @@ abstract class AbstractPrefs(
         else
             sharedPreferences.edit().putFloat(key, value).apply()
 
-    fun clear() =
-        sharedPreferences.edit().clear().apply()
-
     fun getStringRes(@StringRes resId: Int) =
         ctx.resources.getString(resId)
 
@@ -109,5 +106,11 @@ abstract class AbstractPrefs(
 
     fun getIntegerRes(@IntegerRes resId: Int) =
         ctx.resources.getInteger(resId)
+
+    fun clear() =
+        sharedPreferences.edit().clear().commit()
+
+    fun commit() =
+        sharedPreferences.edit().commit()
 
 }
