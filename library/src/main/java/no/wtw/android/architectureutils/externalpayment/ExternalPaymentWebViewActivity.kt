@@ -59,7 +59,7 @@ abstract class ExternalPaymentWebViewActivity :
     protected abstract fun getExternalPaymentUrl(): String
 
     // Either use the default viewBinding, or supply your own AND override these methods
-    protected fun getWebView(): WebView = viewBinding.externalPaymentWebView
-    protected fun getProgressOverlayView(): ProgressOverlayView = viewBinding.progressOverlay
+    protected open fun getWebView(): WebView = viewBinding.externalPaymentWebView
+    protected open fun getProgressOverlayView(): ProgressOverlayView = viewBinding.progressOverlay
 
 }
