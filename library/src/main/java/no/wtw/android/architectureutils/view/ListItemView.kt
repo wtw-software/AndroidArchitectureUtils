@@ -15,7 +15,7 @@ open class ListItemView @JvmOverloads constructor(
 ) : RelativeLayout(context, attrs, defStyleAttr),
     ViewWrapper.Binder<Listable> {
 
-    private val viewBinding by viewBinding<ListItemViewBinding>()
+    protected val viewBinding by viewBinding<ListItemViewBinding>()
 
     override fun bind(data: Listable) {
         viewBinding.apply {
