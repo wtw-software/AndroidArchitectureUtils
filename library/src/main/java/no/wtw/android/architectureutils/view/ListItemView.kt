@@ -8,7 +8,7 @@ import no.wtw.android.architectureutils.adapter.ViewWrapper
 import no.wtw.android.architectureutils.databinding.ListItemViewBinding
 import no.wtw.android.architectureutils.model.Listable
 
-class ListItemView @JvmOverloads constructor(
+open class ListItemView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0,
