@@ -2,6 +2,7 @@ package no.wtw.android.architectureutils.view
 
 import android.content.Context
 import android.util.AttributeSet
+import android.view.View
 import android.widget.FrameLayout
 import no.wtw.android.architectureutils.R
 import no.wtw.android.architectureutils.databinding.ProgressOverlayBinding
@@ -17,7 +18,8 @@ class ProgressOverlayView @JvmOverloads constructor(
 
     init {
         viewBinding.apply {
-            // contentDescription = getContext().getString(R.string.please_wait)
+            accessibilityLiveRegion = View.ACCESSIBILITY_LIVE_REGION_POLITE
+            progressBar.contentDescription = getContext().getString(R.string.please_wait)
             if (isInEditMode) {
                 alpha = 0.5f
             } else {
