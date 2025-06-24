@@ -17,7 +17,7 @@ class ProgressOverlayView @JvmOverloads constructor(
 
     init {
         viewBinding.apply {
-            contentDescription = getContext().getString(R.string.please_wait)
+            // contentDescription = getContext().getString(R.string.please_wait)
             if (isInEditMode) {
                 alpha = 0.5f
             } else {
