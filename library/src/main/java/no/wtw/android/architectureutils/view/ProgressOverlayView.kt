@@ -22,7 +22,6 @@ class ProgressOverlayView @JvmOverloads constructor(
                 alpha = 0.5f
             } else {
                 visibility = GONE
-                isClickable = true
             }
         }
     }
