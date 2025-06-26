@@ -44,6 +44,7 @@ abstract class ExternalPaymentWebViewActivity :
     }
 
     override fun setIsLoading(isLoading: Boolean) {
+        getWebView().visibility = if (isLoading) GONE else VISIBLE
         getProgressOverlayView().visibility = if (isLoading) VISIBLE else GONE
     }
 
