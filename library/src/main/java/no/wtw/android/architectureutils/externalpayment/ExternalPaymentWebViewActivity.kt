@@ -1,7 +1,6 @@
 package no.wtw.android.architectureutils.externalpayment
 
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.os.Build
 import android.os.Bundle
 import android.view.View.GONE
@@ -10,18 +9,31 @@ import android.viewbinding.library.activity.viewBinding
 import android.webkit.CookieManager
 import android.webkit.WebView
 import android.widget.Toast
+import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import no.wtw.android.architectureutils.databinding.ExternalPaymentWebViewActivityBinding
 import no.wtw.android.architectureutils.view.ProgressOverlayView
 
 abstract class ExternalPaymentWebViewActivity :
-    Activity(),
+    AppCompatActivity(),
     ExternalPaymentWebViewListener {
 
     private val viewBinding by viewBinding<ExternalPaymentWebViewActivityBinding>()
     private lateinit var client: ExternalPaymentWebViewClient
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        enableEdgeToEdge()
         super.onCreate(savedInstanceState)
+
+        ViewCompat.setOnApplyWindowInsetsListener(viewBinding.root) { _, windowInsets ->
+            val insets =
+                windowInsets.getInsets(WindowInsetsCompat.Type.ime() or WindowInsetsCompat.Type.statusBars() or WindowInsetsCompat.Type.tappableElement() or WindowInsetsCompat.Type.displayCutout())
+            viewBinding.root.setPadding(insets.left, insets.top, insets.right, insets.bottom)
+            WindowInsetsCompat.CONSUMED
+        }
+
         client = ExternalPaymentWebViewClient(this)
         getWebView().settings.apply {
             domStorageEnabled = true
