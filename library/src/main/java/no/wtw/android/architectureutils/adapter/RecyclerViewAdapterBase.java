@@ -3,16 +3,24 @@ package no.wtw.android.architectureutils.adapter;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.core.graphics.Insets;
+import androidx.recyclerview.widget.RecyclerView;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-
-import androidx.recyclerview.widget.RecyclerView;
 
 public abstract class RecyclerViewAdapterBase<D, V extends View & ViewWrapper.Binder<D>> extends RecyclerView.Adapter<ViewWrapper<D, V>> {
 
     protected List<D> originalItems = new ArrayList<>();
     protected List<D> filteredItems = new ArrayList<>();
+
+    private Insets listItemInsets = Insets.NONE;
+
+    protected void setListItemInsets(Insets insets) {
+        this.listItemInsets = insets;
+        notifyDataSetChanged();
+    }
 
     private OnItemClickListener<D, V> listener;
 
@@ -31,7 +39,7 @@ public abstract class RecyclerViewAdapterBase<D, V extends View & ViewWrapper.Bi
     public void onBindViewHolder(final ViewWrapper<D, V> viewHolder, final int position) {
         final V view = viewHolder.getView();
         final D data = filteredItems.get(position);
-        view.bind(data);
+        view.bind(data, listItemInsets);
         view.setOnClickListener(v -> onItemClick(viewHolder.getAdapterPosition(), view, data));
     }
 
