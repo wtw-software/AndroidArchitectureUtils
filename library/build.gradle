@@ -5,13 +5,11 @@ apply plugin: 'kotlin-kapt'
 group = 'com.github.wtw-software'
 
 android {
-    compileSdkVersion 33
+    compileSdk 35
 
     defaultConfig {
-        minSdkVersion 19
-        targetSdkVersion 33
-        versionCode 1
-        versionName "1"
+        minSdkVersion 21
+        targetSdkVersion 35
 
         javaCompileOptions {
             annotationProcessorOptions {
@@ -30,21 +28,13 @@ android {
     buildFeatures {
         viewBinding true
     }
-
     packagingOptions {
-        exclude 'META-INF/license.txt'
-        exclude 'META-INF/notice.txt'
-        exclude 'META-INF/DEPENDENCIES.txt'
-        exclude 'META-INF/LICENSE.txt'
-        exclude 'META-INF/NOTICE.txt'
-        exclude 'META-INF/NOTICE'
-        exclude 'META-INF/LICENSE'
-        exclude 'META-INF/DEPENDENCIES'
-        exclude 'META-INF/dependencies.txt'
-        exclude 'META-INF/LGPL2.1'
-        exclude 'LICENSE.txt'
-        exclude 'LICENSE'
+        resources {
+            excludes += ['META-INF/license.txt', 'META-INF/notice.txt', 'META-INF/DEPENDENCIES.txt', 'META-INF/LICENSE.txt', 'META-INF/NOTICE.txt', 'META-INF/NOTICE', 'META-INF/LICENSE', 'META-INF/DEPENDENCIES', 'META-INF/dependencies.txt', 'META-INF/LGPL2.1', 'LICENSE.txt', 'LICENSE']
+        }
     }
+
+    namespace 'no.wtw.android.architectureutils'
 }
 
 dependencies {
@@ -63,7 +53,7 @@ dependencies {
 
 task sourcesJar(type: Jar) {
     from android.sourceSets.main.java.srcDirs
-    classifier = 'sources'
+    archiveClassifier = 'sources'
 }
 
 artifacts {

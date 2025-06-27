@@ -3,12 +3,12 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 
 android {
-    compileSdk 33
+    compileSdk 35
 
     defaultConfig {
         applicationId "no.wtw.android.architectureutils.example"
-        minSdkVersion 19
-        targetSdkVersion 33
+        minSdkVersion 21
+        targetSdkVersion 35
         versionCode 1
         versionName "1.0"
 
@@ -44,6 +44,7 @@ android {
     kapt {
         correctErrorTypes = true
     }
+    namespace 'no.wtw.android.architectureutils.example'
 
 }
 
@@ -52,7 +53,7 @@ dependencies {
     implementation "com.google.android.gms:play-services-auth:20.4.0"
 
     implementation project(':library')
-    implementation "androidx.core:core-ktx:1.9.0"
+    implementation "androidx.core:core-ktx:1.16.0"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1"
 }
 

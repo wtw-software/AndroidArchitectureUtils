@@ -33,15 +33,15 @@ class RecyclerViewActivity : AppCompatActivity() {
     }
 
     private inner class ExampleItem : Listable {
-        override fun getTitle(context: Context): String {
+        override fun getTitle(context: Context?): String {
             return "foo"
         }
 
-        override fun getSubTitle(context: Context): String {
+        override fun getSubTitle(context: Context?): String {
             return "bar"
         }
 
-        override fun getIconResourceId(context: Context): Int {
+        override fun getIconResourceId(context: Context?): Int {
             return R.drawable.ic_person_black_24dp
         }
     }
