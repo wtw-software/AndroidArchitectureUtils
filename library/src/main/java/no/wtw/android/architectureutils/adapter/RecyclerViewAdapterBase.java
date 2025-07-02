@@ -17,7 +17,7 @@ public abstract class RecyclerViewAdapterBase<D, V extends View & ViewWrapper.Bi
 
     protected Insets listItemInsets = Insets.NONE;
 
-    protected void setListItemInsets(Insets insets) {
+    public void setListItemInsets(Insets insets) {
         this.listItemInsets = insets;
         notifyDataSetChanged();
     }
