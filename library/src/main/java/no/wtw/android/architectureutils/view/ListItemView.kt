@@ -20,6 +20,7 @@ open class ListItemView @JvmOverloads constructor(
 
     override fun bind(data: Listable, insets: Insets) {
         viewBinding.apply {
+            clickableRoot.setPadding(insets.left, insets.top, insets.right, insets.bottom)
             icon.setImageResource(data.getIconResourceId(context))
             icon.visibility = if (data.getIconResourceId(context) == 0) GONE else VISIBLE
             title.text = data.getTitle(context)

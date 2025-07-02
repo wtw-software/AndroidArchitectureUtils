@@ -1,58 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/clickable_root"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="?selectableItemBackground"
-    android:minHeight="?listPreferredItemHeightLarge"
-    android:paddingTop="16dp"
-    android:paddingBottom="16dp">
+    android:minHeight="?listPreferredItemHeightLarge">
 
-    <ImageView
-        android:id="@+id/icon"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_centerVertical="true"
-        android:layout_marginLeft="16dp"
-        android:contentDescription="@null"
-        android:scaleType="centerInside" />
-
-    <LinearLayout
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_marginLeft="16dp"
-        android:layout_toRightOf="@id/icon"
-        android:orientation="vertical">
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp">
 
-        <TextView
-            android:id="@+id/title"
+        <ImageView
+            android:id="@+id/icon"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="16dp"
+            android:contentDescription="@null"
+            android:scaleType="centerInside" />
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?listItemViewTitleAppearance"
-            android:textColor="?android:textColorPrimary"
-            tools:text="Testkort" />
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="16dp"
+            android:layout_toRightOf="@id/icon"
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/subtitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?listItemViewBodyAppearance"
-            tools:text="**3000" />
-    </LinearLayout>
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?listItemViewTitleAppearance"
+                android:textColor="?android:textColorPrimary"
+                tools:text="Testkort" />
 
-    <ImageButton
-        android:id="@+id/extra_button"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
-        android:layout_marginRight="16dp"
-        android:background="?selectableItemBackgroundBorderless"
-        android:scaleType="centerInside"
-        android:visibility="gone"
-        tools:visibility="visible" />
+            <TextView
+                android:id="@+id/subtitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?listItemViewBodyAppearance"
+                tools:text="**3000" />
+        </LinearLayout>
 
-</RelativeLayout>
+        <ImageButton
+            android:id="@+id/extra_button"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="16dp"
+            android:background="?selectableItemBackgroundBorderless"
+            android:scaleType="centerInside"
+            android:visibility="gone"
+            tools:visibility="visible" />
 
+    </RelativeLayout>
+
+</FrameLayout>
