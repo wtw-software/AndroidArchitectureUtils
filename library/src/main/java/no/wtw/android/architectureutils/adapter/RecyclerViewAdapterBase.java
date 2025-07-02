@@ -15,7 +15,7 @@ public abstract class RecyclerViewAdapterBase<D, V extends View & ViewWrapper.Bi
     protected List<D> originalItems = new ArrayList<>();
     protected List<D> filteredItems = new ArrayList<>();
 
-    private Insets listItemInsets = Insets.NONE;
+    protected Insets listItemInsets = Insets.NONE;
 
     protected void setListItemInsets(Insets insets) {
         this.listItemInsets = insets;
