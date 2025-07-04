@@ -20,13 +20,17 @@ open class ListItemView @JvmOverloads constructor(
 
     override fun bind(data: Listable, insets: Insets) {
         viewBinding.apply {
-            clickableRoot.setPadding(insets.left, insets.top, insets.right, insets.bottom)
+            applyInsets(insets)
             icon.setImageResource(data.getIconResourceId(context))
             icon.visibility = if (data.getIconResourceId(context) == 0) GONE else VISIBLE
             title.text = data.getTitle(context)
             subtitle.text = data.getSubTitle(context)
             subtitle.visibility = if (TextUtils.isEmpty(data.getSubTitle(context))) GONE else VISIBLE
         }
+    }
+
+    fun applyInsets(insets: Insets) {
+        viewBinding.clickableRoot.setPadding(insets.left, insets.top, insets.right, insets.bottom)
     }
 
 }
