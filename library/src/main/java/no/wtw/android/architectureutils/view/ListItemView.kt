@@ -18,9 +18,10 @@ open class ListItemView @JvmOverloads constructor(
 
     protected val viewBinding by viewBinding<ListItemViewBinding>()
 
-    override fun bind(data: Listable, insets: Insets) {
+    override fun bind(data: Listable, insets: Insets?) {
         viewBinding.apply {
-            applyInsets(insets)
+            if (insets != null)
+                applyInsets(insets)
             icon.setImageResource(data.getIconResourceId(context))
             icon.visibility = if (data.getIconResourceId(context) == 0) GONE else VISIBLE
             title.text = data.getTitle(context)

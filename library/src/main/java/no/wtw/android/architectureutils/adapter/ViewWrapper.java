@@ -2,6 +2,7 @@ package no.wtw.android.architectureutils.adapter;
 
 import android.view.View;
 
+import androidx.annotation.Nullable;
 import androidx.core.graphics.Insets;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -19,7 +20,7 @@ public class ViewWrapper<D, V extends View & ViewWrapper.Binder<D>> extends Recy
     }
 
     public interface Binder<D> {
-        void bind(D data, Insets insets);
+        void bind(D data, @Nullable Insets insets);
     }
 
 }
