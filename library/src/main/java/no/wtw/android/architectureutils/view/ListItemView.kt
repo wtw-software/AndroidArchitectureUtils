@@ -18,10 +18,8 @@ open class ListItemView @JvmOverloads constructor(
 
     protected val viewBinding by viewBinding<ListItemViewBinding>()
 
-    override fun bind(data: Listable, insets: Insets?) {
+    override fun bind(data: Listable) {
         viewBinding.apply {
-            if (insets != null)
-                applyInsets(insets)
             icon.setImageResource(data.getIconResourceId(context))
             icon.visibility = if (data.getIconResourceId(context) == 0) GONE else VISIBLE
             title.text = data.getTitle(context)
@@ -30,7 +28,7 @@ open class ListItemView @JvmOverloads constructor(
         }
     }
 
-    fun applyInsets(insets: Insets) {
+    override fun applyInsets(insets: Insets) {
         viewBinding.clickableRoot.setPadding(insets.left, insets.top, insets.right, insets.bottom)
     }
 

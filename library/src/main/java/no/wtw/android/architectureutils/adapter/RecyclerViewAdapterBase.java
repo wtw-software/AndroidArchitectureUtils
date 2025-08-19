@@ -39,7 +39,9 @@ public abstract class RecyclerViewAdapterBase<D, V extends View & ViewWrapper.Bi
     public void onBindViewHolder(final ViewWrapper<D, V> viewHolder, final int position) {
         final V view = viewHolder.getView();
         final D data = filteredItems.get(position);
-        view.bind(data, listItemInsets);
+        view.bind(data);
+        if (listItemInsets != null)
+            view.applyInsets(listItemInsets);
         view.setOnClickListener(v -> onItemClick(viewHolder.getAdapterPosition(), view, data));
     }
 
