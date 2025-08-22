@@ -26,14 +26,6 @@ abstract class ExternalPaymentWebViewActivity :
     override fun onCreate(savedInstanceState: Bundle?) {
         enableEdgeToEdge()
         super.onCreate(savedInstanceState)
-
-        ViewCompat.setOnApplyWindowInsetsListener(viewBinding.root) { _, windowInsets ->
-            val insets =
-                windowInsets.getInsets(WindowInsetsCompat.Type.ime() or WindowInsetsCompat.Type.statusBars() or WindowInsetsCompat.Type.tappableElement() or WindowInsetsCompat.Type.displayCutout())
-            viewBinding.root.setPadding(insets.left, insets.top, insets.right, insets.bottom)
-            WindowInsetsCompat.CONSUMED
-        }
-
         client = ExternalPaymentWebViewClient(this)
         getWebView().settings.apply {
             domStorageEnabled = true
