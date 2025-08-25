@@ -20,7 +20,7 @@ abstract class ExternalPaymentWebViewActivity :
     AppCompatActivity(),
     ExternalPaymentWebViewListener {
 
-    private val viewBinding by viewBinding<ExternalPaymentWebViewActivityBinding>()
+    protected val viewBinding by viewBinding<ExternalPaymentWebViewActivityBinding>()
     private lateinit var client: ExternalPaymentWebViewClient
 
     override fun onCreate(savedInstanceState: Bundle?) {
