@@ -3,6 +3,7 @@ package no.wtw.android.architectureutils.activityarguments
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import androidx.activity.result.ActivityResultLauncher
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import kotlin.reflect.KClass
@@ -33,7 +34,7 @@ class IntentBuilder<T : Activity>(
     fun get() = intent
     fun start() = ctx.startActivity(intent)
 
-    @Deprecated(message = "Deprecated", replaceWith = ReplaceWith("registerForActivityResult"))
+    @Deprecated(message = "Deprecated", replaceWith = ReplaceWith("launchWith(myLauncher)"))
     fun startForResult(requestCode: Int) {
         if (fragment != null) {
             fragment.startActivityForResult(intent, requestCode)
@@ -42,6 +43,10 @@ class IntentBuilder<T : Activity>(
         } else {
             ctx.startActivity(intent)
         }
+    }
+
+    fun launchWith(launcher: ActivityResultLauncher<Intent>) {
+        launcher.launch(this.intent)
     }
 
 }
