@@ -1,2 +1,0 @@
-include ':library', ':example'
-rootProject.name = 'AndroidArchitectureUtils'

@@ -2,10 +2,8 @@ package no.wtw.android.architectureutils.util
 
 import android.app.Activity
 import android.content.Intent
-import com.google.android.gms.auth.api.credentials.Credential
-import com.google.android.gms.auth.api.credentials.CredentialPickerConfig
-import com.google.android.gms.auth.api.credentials.Credentials
-import com.google.android.gms.auth.api.credentials.HintRequest
+import com.google.android.gms.auth.api.identity.GetPhoneNumberHintIntentRequest
+import com.google.android.gms.auth.api.identity.Identity
 
 class PhoneNumberHintPicker(
         private val activity: Activity,
@@ -13,25 +11,27 @@ class PhoneNumberHintPicker(
         val callback: (credentialId: String) -> Unit) {
 
     fun startForResult(): PhoneNumberHintPicker {
-        val hintRequest = HintRequest.Builder()
-                .setHintPickerConfig(CredentialPickerConfig.Builder().setShowCancelButton(true).build())
-                .setPhoneNumberIdentifierSupported(true)
-                .setEmailAddressIdentifierSupported(false)
-                .build()
-        val intent = Credentials.getClient(activity).getHintPickerIntent(hintRequest)
-        try {
-            activity.startIntentSenderForResult(intent.intentSender, requestCode, null, 0, 0, 0)
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
+        val request = GetPhoneNumberHintIntentRequest.builder().build()
+        Identity.getSignInClient(activity).getPhoneNumberHintIntent(request)
+                .addOnSuccessListener { pendingIntent ->
+                    try {
+                        activity.startIntentSenderForResult(pendingIntent.intentSender, requestCode, null, 0, 0, 0)
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                    }
+                }
+                .addOnFailureListener { it.printStackTrace() }
         return this
     }
 
     fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == this.requestCode && resultCode == Activity.RESULT_OK) {
             data?.let { intent ->
-                val credential: Credential? = intent.getParcelableExtra(Credential.EXTRA_KEY)
-                credential?.let { callback(it.id) }
+                try {
+                    callback(Identity.getSignInClient(activity).getPhoneNumberFromIntent(intent))
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
             }
         }
     }
