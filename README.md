@@ -1,7 +1,7 @@
 # AndroidArchitectureUtils
 Collection of commonly used views and adapter classes. 
 
-[![](https://jitpack.io/v/wtw-software/AndroidArchitectureUtils.svg)](https://jitpack.io/#wtw-software/AndroidArchitectureUtils)
+[![Latest release](https://img.shields.io/github/v/release/wtw-software/AndroidArchitectureUtils)](https://github.com/wtw-software/AndroidArchitectureUtils/packages)
 
 License
 -------
