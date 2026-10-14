@@ -70,4 +70,11 @@ publishing {
             afterEvaluate { from(components["release"]) }
         }
     }
+    repositories {
+        maven {
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/wtw-software/AndroidArchitectureUtils")
+            credentials(PasswordCredentials::class)
+        }
+    }
 }
