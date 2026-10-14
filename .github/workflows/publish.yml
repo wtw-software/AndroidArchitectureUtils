@@ -1,0 +1,33 @@
+name: Publish
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      # Must stay in sync with gradle/gradle-daemon-jvm.properties
+      # (toolchainVendor=ADOPTIUM, toolchainVersion=17). If these drift, Gradle
+      # silently downloads its own matching JDK on every run instead of reusing
+      # the one installed here.
+      - uses: actions/setup-java@v6
+        with:
+          distribution: temurin
+          java-version: 17
+
+      - uses: gradle/actions/setup-gradle@v6
+
+      - name: Publish
+        run: ./gradlew publish
+        env:
+          VERSION: ${{ github.event.release.tag_name }}
+          ORG_GRADLE_PROJECT_GitHubPackagesUsername: ${{ github.actor }}
+          ORG_GRADLE_PROJECT_GitHubPackagesPassword: ${{ secrets.GITHUB_TOKEN }}
